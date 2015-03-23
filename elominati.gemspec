@@ -12,7 +12,9 @@ Gem::Specification.new do |s|
   s.email       = 'chris.ca.cole@gmail.com'
   s.license     = 'MIT'
 
-  s.files         = `git ls-files -z`.split("\x0")
+  # s.files         = `git ls-files -z`.split("\x0")
+  s.files = Dir['lib/   *.rb']
+  s.files += Dir['[A-Z]*'] + Dir['test/**/*']
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ["lib"]
 end
