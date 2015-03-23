@@ -25,7 +25,16 @@ module Elominati
       expected_score = determine_expected_score(primary_player, opponent)
       actual_score   = determine_actual_score(primary_player, opponent)
 
-      primary_player.rating + k * (actual_score - expected_score)
+     (primary_player.rating + k * (actual_score - expected_score)).to_i
+    end
+
+    def self.initializable_args
+      {
+        provisional_k_value: true,
+        expert_threshold:    true,
+        expert_k_value:      true,
+        k_value:             true
+      }
     end
 
     def determine_actual_score(primary_player, opponent)
@@ -39,8 +48,8 @@ module Elominati
     end
 
     def determine_expected_score(primary_player, opponent)
-      exponent    = (opponent.rating - primary_player.rating) / 400;
-      denominator = 1 + 10 ** exponent
+      exponent    = (opponent.rating - primary_player.rating) / 400.to_f
+      denominator = 1 + (10 ** exponent)
 
       1 / denominator
     end
@@ -53,15 +62,6 @@ module Elominati
       else
         @k_value
       end
-    end
-
-    def self.initializable_args
-      {
-        provisional_k_value: true,
-        expert_threshold:    true,
-        expert_k_value:      true,
-        k_value:             true
-      }
     end
   end
 end
