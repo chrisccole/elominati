@@ -21,18 +21,19 @@ module Elominati
           delta_sum += new_rating - player.rating
         end
 
-        @results << result_hash(player, delta_sum)
+        @results << individual_result(player, delta_sum)
       end
 
       @results
     end
 
-    def result_hash(player, delta_sum)
-      {
+    private
+
+    def individual_result(player, delta_sum)
+      OpenStruct.new(
         rating: player.rating + delta_sum,
         delta:  delta_sum >= 0 ? "+#{delta_sum}" : delta_sum,
         id:     player.id
-      }
-    end
+      )
   end
 end
